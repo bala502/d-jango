@@ -87,9 +87,9 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'world',
-        'USER': 'root',
-        'PASSWORD': 'xxxx',
-        'HOST': 'localhost',
+        'USER': 'pythonuser3',
+        'PASSWORD': 'Sup3rs3cr3t!',
+        'HOST': '192.168.0.7',
         'PORT': '3306',
     }   
 }
@@ -144,7 +144,8 @@ LOGIN_URL = 'signup'
 # email configurations
 EMAIL_USE_TLS = True
 EMAIL_HOST = 'smtp.gmail.com'
-EMAIL_HOST_USER = 'xxxx'
-EMAIL_HOST_PASSWORD = 'xxxx'
+EMAIL_HOST_USER = 'tnikhil22@gmail.com'
+EMAIL_HOST_PASSWORD = 'Bala8nkt'
 EMAIL_PORT = 587
+
 
