@@ -37,4 +37,4 @@
         image: "tnikhil22/django:{{DOCKER_TAG}}"
         state: started
         published_ports:
-          - 0.0.0.0:8007:8000
+          - 0.0.0.0:8010:8000
