@@ -25,7 +25,7 @@ SECRET_KEY = '3xb%+*2uex+%1&$@=*+(@^atnm!#tz-n&i5qn$o46jnp&u*2l^'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ["c9ae666b.ngrok.io", "localhost", "*", "192.168.0.7"]
+ALLOWED_HOSTS = ["c9ae666b.ngrok.io", "localhost", "*", "192.168.0.7", "3.110.214.228"]
 
 
 # Application definition
@@ -86,10 +86,10 @@ WSGI_APPLICATION = 'panorbit.wsgi.application'
 DATABASES = { 
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'world',
-        'USER': 'pythonuser3',
-        'PASSWORD': 'Sup3rs3cr3t!',
-        'HOST': '192.168.0.7',
+        'NAME': 'djangodatabase',
+        'USER': 'admin',
+        'PASSWORD': 'Awsdb9700',
+        'HOST': 'django-dbinstance.c7ukmjl3otm0.ap-south-1.rds.amazonaws.com',
         'PORT': '3306',
     }   
 }
