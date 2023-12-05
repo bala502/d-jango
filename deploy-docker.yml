@@ -34,7 +34,7 @@
     - name: Start the container
       docker_container:
         name: djangoapp
-        image: "arunachalamrajesh1/djangoapp:{{DOCKER_TAG}}"
+        image: "tnikhil22/django:{{DOCKER_TAG}}"
         state: started
         published_ports:
-          - 0.0.0.0:8007:8001
+          - 0.0.0.0:8010:8001
