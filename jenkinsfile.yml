@@ -1,0 +1,59 @@
+pipeline {
+    agent any
+
+    environment {
+  DOCKER_TAG = getVersion()
+  DB_Name = credentials ('Db_name')
+  DB_User = credentials ('Db_username')
+  DB_Password = credentials ('Db_password')
+  DB_Host = credentials ('Db_host')
+  DB_Port = credentials ('Db_port')
+}
+    stages {
+       stage('SCM') {
+        steps {
+                git branch: 'djangoapp', 
+                credentialsId: 'javaprojectgitcredentials', 
+                url: 'https://github.com/rajeshArunachalm/ecsdemo.git'
+            }
+       }
+       stage('Docker Build') {
+           
+            steps {
+                
+                sh 'echo databse name $DB_Name'
+                sh 'echo user name $DB_User'
+                sh 'echo password $DB_Password'
+                sh 'echo host $DB_Host'
+                sh 'echo port $DB_Port'
+                sh '''docker build . -t arunachalamrajesh1/djangoapp:${DOCKER_TAG} \\
+                --build-arg DATABASE_NAME="${DB_Name}" \\
+                --build-arg DATABASE_USER="${DB_User}" \\
+                --build-arg DATABASE_PASS="${DB_Password}" \\
+                --build-arg DATABASE_HOST="${DB_Host}" \\
+                --build-arg DATABASE_PORT="${DB_Port}"'''
+                
+                
+            }
+        }
+        stage('Push to Docker Hub') {
+            steps {
+                withCredentials([string(credentialsId: 'dockerHubPwd', variable: 'dockerHubPwd')]) {
+                sh "docker login -u arunachalamrajesh1 -p ${dockerHubPwd}"
+             }
+              sh 'docker push arunachalamrajesh1/djangoapp:${DOCKER_TAG}'
+            }
+        }
+        stage('Production Deployment') {
+            steps {
+                ansiblePlaybook credentialsId: 'prodserv', disableHostKeyChecking: true, extras: '-e DOCKER_TAG=${DOCKER_TAG}', installation: 'ansiblehome', inventory: 'prod.inv', playbook: 'deploy-docker.yml', vaultTmpPath: ''
+            }
+        }
+    }
+}
+
+
+def getVersion(){
+    def commitHash = sh label: '', returnStdout: true, script: 'git rev-parse --short HEAD'
+    return commitHash
+}

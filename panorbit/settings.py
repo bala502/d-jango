@@ -12,6 +12,10 @@ https://docs.djangoproject.com/en/1.11/ref/settings/
 
 import os
 
+from os import environ as env
+
+from decouple import config
+
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
@@ -25,7 +29,7 @@ SECRET_KEY = '3xb%+*2uex+%1&$@=*+(@^atnm!#tz-n&i5qn$o46jnp&u*2l^'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ["c9ae666b.ngrok.io", "localhost", "*", "192.168.0.7", "3.110.214.228"]
+ALLOWED_HOSTS = ["c9ae666b.ngrok.io", "localhost", "192.168.29.24", "*"]
 
 
 # Application definition
@@ -86,11 +90,16 @@ WSGI_APPLICATION = 'panorbit.wsgi.application'
 DATABASES = { 
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'djangodatabase',
-        'USER': 'admin',
-        'PASSWORD': 'Awsdb9700',
-        'HOST': 'django-dbinstance.c7ukmjl3otm0.ap-south-1.rds.amazonaws.com',
-        'PORT': '3306',
+#        'NAME': 'world',
+        'NAME' : config('DATABASE_NAME'),
+#        'USER': 'pythonuser2',
+        'USER' : config('DATABASE_USER'),
+#        'PASSWORD': 'Pythonuser123$',
+        'PASSWORD' : config('DATABASE_PASS'), 
+#        'HOST': '192.168.29.24',
+        'HOST' : config('DATABASE_HOST'),
+#        'PORT': '3306',
+        'PORT' : config('DATABASE_PORT'),
     }   
 }
 
@@ -144,8 +153,7 @@ LOGIN_URL = 'signup'
 # email configurations
 EMAIL_USE_TLS = True
 EMAIL_HOST = 'smtp.gmail.com'
-EMAIL_HOST_USER = 'tnikhil22@gmail.com'
-EMAIL_HOST_PASSWORD = 'Bala8nkt'
+EMAIL_HOST_USER = 'rajeshdevops.24.04.93@gmail.com'
+EMAIL_HOST_PASSWORD = 'Rajesh@123!'
 EMAIL_PORT = 587
-
 
