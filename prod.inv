@@ -1,0 +1,2 @@
+[prod]
+172.31.13.174 ansible_user=ubuntu
